@@ -1,7 +1,14 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 
 
 class UserSchema(BaseModel):
-    username: str
+    name: str
     email: str
     age: int
+
+    @validator("name")
+    def validate_name(cls, v):
+        if ' ' in v:
+            return v
+        else:
+            raise ValueError("Name must contain a space")

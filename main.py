@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from deta import Deta
 from dotenv import load_dotenv
+from json import dump
 
 from schemas import UserSchema
 
