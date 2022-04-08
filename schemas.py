@@ -1,10 +1,15 @@
-from pydantic import BaseModel, validator
+import datetime
+from typing import Optional
+
+from pydantic import BaseModel, EmailStr, validator
 
 
-class UserSchema(BaseModel):
+class SubscriberSchema(BaseModel):
     name: str
-    email: str
-    age: int
+    email: Optional[EmailStr] = None
+    dob: Optional[datetime.date] = None
+    phone_number: Optional[str] = None
+    address: Optional[str] = None
 
     @validator("name")
     def validate_name(cls, v):

@@ -4,9 +4,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from deta import Deta
 from dotenv import load_dotenv
-from json import dump
 
-from schemas import UserSchema
+from schemas import SubscriberSchema
 
 DOTENV_PATH = os.path.join(os.path.dirname(__file__), ".env")
 
@@ -26,20 +25,20 @@ app.add_middleware(
 )
 
 
-@app.post("/users", response_model=UserSchema)
-async def create_user(user: UserSchema):
+@app.post("/users", response_model=SubscriberSchema)
+async def create_user(user: SubscriberSchema):
     new_user = db.put(user.dict())
     return new_user
 
 
-@app.get("/users/{key}", response_model=UserSchema)
+@app.get("/users/{key}", response_model=SubscriberSchema)
 async def get_user(key: str):
     user = db.get(key)
     return user
 
 
-@app.put("/users/{key}", response_model=UserSchema)
-async def update_user(key: str, user: UserSchema):
+@app.put("/users/{key}", response_model=SubscriberSchema)
+async def update_user(key: str, user: SubscriberSchema):
     updated_user = db.update(user.dict(), key)
     return updated_user
 
